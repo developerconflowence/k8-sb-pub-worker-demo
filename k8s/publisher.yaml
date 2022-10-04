@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: sp-publisher-Pod
+  labels:
+    component: web
+spec:
+  containers:
+  - name: sp-publisher
+    image: conflowence/sp-publisher
+    ports:
+    - containerPort: 9000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-publisher-svc
+spec:
+  selector:
+    component: web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9000
+      nodePort: 31515
