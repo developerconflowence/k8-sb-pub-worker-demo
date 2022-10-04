@@ -1,15 +1,28 @@
-apiVersion: v1
-kind: Pod
-metadata: 
-  name: sp-publisher-Pod
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sp-publisher-deploy
   labels:
-    component: web
+    app: sp-publisher
 spec:
-  containers:
-  - name: sp-publisher
-    image: conflowence/sp-publisher
-    ports:
-    - containerPort: 9000
+  replicas: 3
+  selector:
+    matchLabels:
+       app: sp-publisher
+  template:
+    metadata: 
+      name: sp-publisher-pod
+      labels:
+        app: sp-publisher
+    spec:
+      containers:
+      - name: sp-publisher
+        image: conflowence/sp-publisher
+        env:
+        - name: SPRING_RABBITMQ_HOST
+          value: "rabbit-mq-svc"
+        ports:
+        - containerPort: 9000
 
 ---
 apiVersion: v1
@@ -17,8 +30,9 @@ kind: Service
 metadata:
   name: my-publisher-svc
 spec:
+  type: LoadBalancer
   selector:
-    component: web
+    app: sp-publisher
   ports:
     - protocol: TCP
       port: 80

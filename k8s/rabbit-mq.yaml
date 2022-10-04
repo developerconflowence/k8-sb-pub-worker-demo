@@ -22,10 +22,12 @@ spec:
   selector:
     component: rabbitmq-server
   ports:
-    - protocol: TCP
-      port: 80
+    - name: management
+      protocol: TCP
+      port: 15672
       targetPort: 15672
       nodePort: 30000
-    - protocol: TCP
-      port: 80
+    - name: service
+      protocol: TCP
+      port: 5672
       targetPort: 5672

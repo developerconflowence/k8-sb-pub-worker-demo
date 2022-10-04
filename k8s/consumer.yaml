@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sp-consumer-deploy
+  labels:
+    app: sp-consumer
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+       app: sp-consumer
+  template:
+    metadata: 
+      name: sp-consumer-pod
+      labels:
+        app: sp-consumer
+    spec:
+      containers:
+      - name: sp-consumer
+        image: conflowence/sp-consumer
+        env:
+        - name: SPRING_RABBITMQ_HOST
+          value: "rabbit-mq-svc"
+        ports:
+        - containerPort: 9000
