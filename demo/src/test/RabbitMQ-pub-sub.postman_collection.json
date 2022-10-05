@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "465f3309-850d-42d8-a80c-883cfbad2444",
+		"name": "RabbitMQ-pub-sub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22095484"
+	},
+	"item": [
+		{
+			"name": "publishWork",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\":\"hello world\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://172.29.79.172:31515/api/publish",
+					"protocol": "http",
+					"host": [
+						"172",
+						"29",
+						"79",
+						"172"
+					],
+					"port": "31515",
+					"path": [
+						"api",
+						"publish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetResult",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://172.29.79.172:31515/api/result",
+					"protocol": "http",
+					"host": [
+						"172",
+						"29",
+						"79",
+						"172"
+					],
+					"port": "31515",
+					"path": [
+						"api",
+						"result"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
